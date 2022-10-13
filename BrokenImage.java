@@ -1,4 +1,9 @@
+package day13102022;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,13 +14,21 @@ public class BrokenImage {
     {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
-        driver.get("https://www.demoqa.com/broken");
-        WebElement b_image = driver.findElement(By.xpath("//img[2]"));
-        if(b_image.getAttribute("naturalWidth").equals("0"))
+        driver.get("https://demoqa.com/broken");
+        List<WebElement> b_image = driver.findElements(By.xpath("//div/img"));
+        for(WebElement w : b_image)
         {
-            System.out.println("broken");
+        	if(w.getAttribute("naturalWidth").equals("0"))
+            {
+        		System.out.println("w get attribute: "+w.getAttribute("naturalWidth"));
+                System.out.println("broken");
+            }
+            else
+            {
+            	System.out.println("w get attribute: "+w.getAttribute("naturalWidth"));
+                System.out.println("not broken");
+            }
         }
-        else
-            System.out.println("not broken");
+        
     }
 }
